@@ -6,7 +6,7 @@
 #include "objPosList.h"
 #include "ItemBin.h"
 #include "cmdQueue.h"
-#include "objPosTree.h"
+#include "objPosBST.h"
 
 // Forward Declaration
 class GameMechs;

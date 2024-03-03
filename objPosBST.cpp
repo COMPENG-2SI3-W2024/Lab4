@@ -1,4 +1,4 @@
-#include "objPosTree.h"
+#include "objPosBST.h"
 
 #include <iostream>
 using namespace std;
