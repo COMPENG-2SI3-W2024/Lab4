@@ -4,7 +4,7 @@
 #include "Player.h"
 
 #define WIN_SCORE 1000
-#define WIN_SPECIAL_THRES 100
+#define WIN_SPECIAL_THRES 90
 #define MAX_PLAYER_COUNT 4
 
 // Forward Declaration
