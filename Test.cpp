@@ -7,8 +7,8 @@
 
 #define SIZE20 20
 #define SIZE50 50
-#define TOTAL_ASSERT_COUNT 146
-#define TOTAL_TEST_CASES 8
+#define TOTAL_ASSERT_COUNT 214
+#define TOTAL_TEST_CASES 14
 
 #include <iostream>
 using namespace std;
@@ -87,7 +87,8 @@ void testConstructorIsInTreeEmpty() {
 	cout << "TEST: testConstructorIsInTreeEmpty" << endl;
 
 	createNewTrees();
-	objPos target = generateRandomPos();
+	char testPF = (rand() % 26) + 'a';
+	objPos target(0, 0, 0, testPF, 'a');
 	bool expected = false;
 	bool actual = TreeUnderTest->isInTree(target);	
 	
@@ -107,35 +108,32 @@ void testConstructorIsInTreeEmpty() {
 // Required Methods:
 // insert(), isLeaf(), printTree()
 
-// 20 assertion counts
-void testInsert20IsLeafCheckPrintTree() {
+// 26 assertion counts  (a - z)
+void testInsert20IsLeafCheckPrintTreeCase1() {
 
 	bool result = true;
 
-	cout << "TEST: testInsert20IsLeafCheckPrintTree" << endl;
-	objPos itemArray[COUNT];
+	cout << "TEST: testInsert20IsLeafCheckPrintTreeCase1" << endl;
 	bool expected, actual;
 	createNewTrees();
 
-	for(int i = 0; i < COUNT; i++)
+	for(int i = 0; i < SIZE20; i++)
 	{
-		itemArray[i] = generateRandomPos();
-		TreeUnderTest->insert(itemArray[i]);
-		TreeModel->insert(itemArray[i]);
+		TreeUnderTest->insert(data20w98[i]);
 	}
 
 	if(verboseMode)
 	{
 		cout << "Tree Under Test:" << endl;
-		TreeUnderTest->printTree();
-		cout << "Tree Model:" << endl;
-		TreeModel->printTree();
+		TreeUnderTest->printTree();			
 	}
 	
-	for(int i = 0; i < COUNT; i++)
+	objPos target(0, 0, 0, 'a', 'a');  // dummy
+	for(int i = 0; i < 26; i++)
 	{
-		actual = TreeUnderTest->isLeaf(itemArray[i]);
-		expected = TreeModel->isLeaf(itemArray[i]);
+		target.setPF(i + 'a');
+		actual = TreeUnderTest->isLeaf(target);
+		expected = data20w98isLeaf[i];
 
 		result = result & assert_equal(expected, actual);
 	}
@@ -144,35 +142,33 @@ void testInsert20IsLeafCheckPrintTree() {
 	if(result) passCount++;
 }
 
-// 50 assertion counts
-void testInsert50IsLeafCheckPrintTree() {
+
+// 26 assertion counts  (a - z)
+void testInsert20IsLeafCheckPrintTreeCase2() {
 
 	bool result = true;
 
-	cout << "TEST: testInsert50IsLeafCheckPrintTree" << endl;
-	objPos itemArray[LARGE_COUNT];
+	cout << "TEST: testInsert20IsLeafCheckPrintTreeCase2" << endl;
 	bool expected, actual;
 	createNewTrees();
 
-	for(int i = 0; i < LARGE_COUNT; i++)
+	for(int i = 0; i < SIZE20; i++)
 	{
-		itemArray[i] = generateRandomPos();
-		TreeUnderTest->insert(itemArray[i]);
-		TreeModel->insert(itemArray[i]);
+		TreeUnderTest->insert(data20wo98[i]);
 	}
-	
+
 	if(verboseMode)
 	{
 		cout << "Tree Under Test:" << endl;
-		TreeUnderTest->printTree();
-		cout << "Tree Model:" << endl;
-		TreeModel->printTree();
+		TreeUnderTest->printTree();		
 	}
 	
-	for(int i = 0; i < LARGE_COUNT; i++)
+	objPos target(0, 0, 0, 'a', 'a');  // dummy
+	for(int i = 0; i < 26; i++)
 	{
-		actual = TreeUnderTest->isLeaf(itemArray[i]);
-		expected = TreeModel->isLeaf(itemArray[i]);
+		target.setPF(i + 'a');
+		actual = TreeUnderTest->isLeaf(target);
+		expected = data20wo98isLeaf[i];
 
 		result = result & assert_equal(expected, actual);
 	}
@@ -180,6 +176,76 @@ void testInsert50IsLeafCheckPrintTree() {
 	clearTrees();
 	if(result) passCount++;
 }
+
+// 26 assertion counts  (a - z)
+void testInsert50IsLeafCheckPrintTreeCase1() {
+
+	bool result = true;
+
+	cout << "TEST: testInsert50IsLeafCheckPrintTreeCase1" << endl;
+	bool expected, actual;
+	createNewTrees();
+
+	for(int i = 0; i < SIZE50; i++)
+	{
+		TreeUnderTest->insert(data50w98[i]);
+	}
+
+	if(verboseMode)
+	{
+		cout << "Tree Under Test:" << endl;
+		TreeUnderTest->printTree();		
+	}
+	
+	objPos target(0, 0, 0, 'a', 'a');  // dummy
+	for(int i = 0; i < 26; i++)
+	{
+		target.setPF(i + 'a');
+		actual = TreeUnderTest->isLeaf(target);
+		expected = data50w98isLeaf[i];
+
+		result = result & assert_equal(expected, actual);
+	}
+			
+	clearTrees();
+	if(result) passCount++;
+}
+
+// 26 assertion counts  (a - z)
+void testInsert50IsLeafCheckPrintTreeCase2() {
+
+	bool result = true;
+
+	cout << "TEST: testInsert50IsLeafCheckPrintTreeCase2" << endl;
+	bool expected, actual;
+	createNewTrees();
+
+	for(int i = 0; i < SIZE50; i++)
+	{
+		TreeUnderTest->insert(data50wo98[i]);
+	}
+	
+	if(verboseMode)
+	{
+		cout << "Tree Under Test:" << endl;
+		TreeUnderTest->printTree();		
+	}
+
+	objPos target(0, 0, 0, 'a', 'a');  // dummy
+	for(int i = 0; i < 26; i++)
+	{
+		target.setPF(i + 'a');
+		actual = TreeUnderTest->isLeaf(target);
+		expected = data50wo98isLeaf[i];
+
+		result = result & assert_equal(expected, actual);
+	}
+			
+	clearTrees();
+	if(result) passCount++;
+}
+
+
 
 /////////////////////////////////////
 /////////////////////////////////////
@@ -190,53 +256,42 @@ void testInsert50IsLeafCheckPrintTree() {
 // Required Methods:
 // remove(), isInTree()
 
-// 20 assertion calls
-void testInsert20Remove10IsInTreeCheckPrintTree() {
+// 26 assertion counts  (a - z)
+#define REMOVECOUNT1 3
+void testInsert20Remove3IsInTreeCheckPrintTreeCase1() {
 
 	bool result = true;
-	int randIndex = 0;
 
-	cout << "TEST: testInsert20Remove10IsInTreeCheckPrintTree" << endl;
-	objPos itemArray[COUNT];
+	cout << "TEST: testInsert20Remove3IsInTreeCheckPrintTreeCase1" << endl;
 	bool expected, actual;
 	createNewTrees();
 
-	for(int i = 0; i < COUNT; i++)
+	for(int i = 0; i < SIZE20; i++)
 	{
-		itemArray[i] = generateRandomPos();
-		TreeUnderTest->insert(itemArray[i]);
-		TreeModel->insert(itemArray[i]);
+		TreeUnderTest->insert(data20w98[i]);
 	}
 
 	if(verboseMode)
 	{
-		cout << "Before Removals" << endl;
 		cout << "Tree Under Test:" << endl;
-		TreeUnderTest->printTree();
-		cout << "Tree Model:" << endl;
-		TreeModel->printTree();
+		TreeUnderTest->printTree();			
 	}
 
-	for(int i = 0; i < COUNT / 2; i++)
+	objPos target(0, 0, 0, 'a', 'a');  // dummy
+	int targetChar[REMOVECOUNT1];
+	for(int i = 0; i < REMOVECOUNT1; i++)
 	{
-		randIndex = rand() % COUNT;
-		TreeUnderTest->remove(itemArray[randIndex]);
-		TreeModel->remove(itemArray[randIndex]);
-	}
-
-	if(verboseMode)
-	{
-		cout << "After Removals" << endl;
-		cout << "Tree Under Test:" << endl;
-		TreeUnderTest->printTree();
-		cout << "Tree Model:" << endl;
-		TreeModel->printTree();
+		targetChar[i] = rand() % 26;
+		data20w98isInTree[targetChar[i]] = false;
+		target.setPF(targetChar[i] + 'a');
+		TreeUnderTest->remove(target);
 	}
 	
-	for(int i = 0; i < COUNT; i++)
+	for(int i = 0; i < 26; i++)
 	{
-		actual = TreeUnderTest->isInTree(itemArray[i]);
-		expected = TreeModel->isInTree(itemArray[i]);
+		target.setPF(i + 'a');
+		actual = TreeUnderTest->isInTree(target);
+		expected = data20w98isInTree[i];
 
 		result = result & assert_equal(expected, actual);
 	}
@@ -245,53 +300,43 @@ void testInsert20Remove10IsInTreeCheckPrintTree() {
 	if(result) passCount++;
 }
 
-// 50 assertion calls
-void testInsert50Remove20IsInTreeCheckPrintTree() {
+
+// 26 assertion counts  (a - z)
+#define REMOVECOUNT2 5
+void testInsert20Remove5IsInTreeCheckPrintTreeCase2() {
 
 	bool result = true;
-	int randIndex = 0;
 
-	cout << "TEST: testInsert50Remove20IsInTreeCheckPrintTree" << endl;
-	objPos itemArray[LARGE_COUNT];
+	cout << "TEST: testInsert20Remove5IsInTreeCheckPrintTreeCase2" << endl;
 	bool expected, actual;
 	createNewTrees();
 
-	for(int i = 0; i < LARGE_COUNT; i++)
+	for(int i = 0; i < SIZE20; i++)
 	{
-		itemArray[i] = generateRandomPos();
-		TreeUnderTest->insert(itemArray[i]);
-		TreeModel->insert(itemArray[i]);
+		TreeUnderTest->insert(data20wo98[i]);
 	}
 
 	if(verboseMode)
 	{
-		cout << "Before Removals" << endl;
 		cout << "Tree Under Test:" << endl;
-		TreeUnderTest->printTree();
-		cout << "Tree Model:" << endl;
-		TreeModel->printTree();	
+		TreeUnderTest->printTree();			
 	}
 
-	for(int i = 0; i < COUNT; i++)
+	objPos target(0, 0, 0, 'a', 'a');  // dummy
+	int targetChar[REMOVECOUNT2];
+	for(int i = 0; i < REMOVECOUNT2; i++)
 	{
-		randIndex = rand() % LARGE_COUNT;
-		TreeUnderTest->remove(itemArray[randIndex]);
-		TreeModel->remove(itemArray[randIndex]);
-	}
-
-	if(verboseMode)
-	{
-		cout << "After Removals" << endl;
-		cout << "Tree Under Test:" << endl;
-		TreeUnderTest->printTree();
-		cout << "Tree Model:" << endl;
-		TreeModel->printTree();
+		targetChar[i] = rand() % 26;
+		data20wo98isInTree[targetChar[i]] = false;
+		target.setPF(targetChar[i] + 'a');
+		TreeUnderTest->remove(target);
 	}
 	
-	for(int i = 0; i < LARGE_COUNT; i++)
+	for(int i = 0; i < 26; i++)
 	{
-		actual = TreeUnderTest->isInTree(itemArray[i]);
-		expected = TreeModel->isInTree(itemArray[i]);
+		target.setPF(i + 'a');
+		actual = TreeUnderTest->isInTree(target);
+		expected = data20wo98isInTree[i];
 
 		result = result & assert_equal(expected, actual);
 	}
@@ -299,6 +344,96 @@ void testInsert50Remove20IsInTreeCheckPrintTree() {
 	clearTrees();
 	if(result) passCount++;
 }
+
+
+// 26 assertion counts  (a - z)
+#define REMOVECOUNT3 8
+void testInsert50Remove8IsInTreeCheckPrintTreeCase1() {
+
+	bool result = true;
+
+	cout << "TEST: testInsert50Remove8IsInTreeCheckPrintTreeCase1" << endl;
+	bool expected, actual;
+	createNewTrees();
+
+	for(int i = 0; i < SIZE50; i++)
+	{
+		TreeUnderTest->insert(data50w98[i]);
+	}
+
+	if(verboseMode)
+	{
+		cout << "Tree Under Test:" << endl;
+		TreeUnderTest->printTree();			
+	}
+
+	objPos target(0, 0, 0, 'a', 'a');  // dummy
+	int targetChar[REMOVECOUNT3];
+	for(int i = 0; i < REMOVECOUNT3; i++)
+	{
+		targetChar[i] = rand() % 26;
+		data50w98isInTree[targetChar[i]] = false;
+		target.setPF(targetChar[i] + 'a');
+		TreeUnderTest->remove(target);
+	}
+	
+	for(int i = 0; i < 26; i++)
+	{
+		target.setPF(i + 'a');
+		actual = TreeUnderTest->isInTree(target);
+		expected = data50w98isInTree[i];
+
+		result = result & assert_equal(expected, actual);
+	}
+			
+	clearTrees();
+	if(result) passCount++;
+}
+
+// 26 assertion counts  (a - z)
+#define REMOVECOUNT4 10
+void testInsert50Remove10IsInTreeCheckPrintTreeCase2() {
+
+	bool result = true;
+
+	cout << "TEST: testInsert50Remove10IsInTreeCheckPrintTreeCase2" << endl;
+	bool expected, actual;
+	createNewTrees();
+
+	for(int i = 0; i < SIZE50; i++)
+	{
+		TreeUnderTest->insert(data50wo98[i]);
+	}
+
+	if(verboseMode)
+	{
+		cout << "Tree Under Test:" << endl;
+		TreeUnderTest->printTree();			
+	}
+
+	objPos target(0, 0, 0, 'a', 'a');  // dummy
+	int targetChar[REMOVECOUNT4];
+	for(int i = 0; i < REMOVECOUNT4; i++)
+	{
+		targetChar[i] = rand() % 26;
+		data50wo98isInTree[targetChar[i]] = false;
+		target.setPF(targetChar[i] + 'a');
+		TreeUnderTest->remove(target);
+	}
+	
+	for(int i = 0; i < 26; i++)
+	{
+		target.setPF(i + 'a');
+		actual = TreeUnderTest->isInTree(target);
+		expected = data50wo98isInTree[i];
+
+		result = result & assert_equal(expected, actual);
+	}
+			
+	clearTrees();
+	if(result) passCount++;
+}
+
 
 
 ///////////////////////////////////////////
@@ -310,116 +445,125 @@ void testInsert50Remove20IsInTreeCheckPrintTree() {
 // Required Methods:
 // findGreater()
 
-// 2 assertion calls
-void testInsert20Insert10FindGreaterCheckPrintTree() {
+#define THRESHOLD 98
+
+// 1 assertion call
+void testInsert20w98FindGreaterCheckPrintTree() {
 
 	bool result = true;
 
-	cout << "TEST: testInsert20Insert10FindGreaterCheckPrintTree" << endl;
-	objPos itemArray[COUNT];
-	objPos itemArrayAdditional[COUNT/2];
+	cout << "TEST: testInsert20w98FindGreaterCheckPrintTree" << endl;
 	bool expected, actual;
 	createNewTrees();
+	createData20w98();  // resetting remove modification
 
-	for(int i = 0; i < COUNT; i++)
+	for(int i = 0; i < SIZE20; i++)
 	{
-		itemArray[i] = generateRandomPos();
-		TreeUnderTest->insert(itemArray[i]);
-		TreeModel->insert(itemArray[i]);
+		TreeUnderTest->insert(data20w98[i]);
 	}
 
 	if(verboseMode)
 	{
-		cout << "Before Inserting Large Numbers" << endl;
 		cout << "Tree Under Test:" << endl;
-		TreeUnderTest->printTree();
-		cout << "Tree Model:" << endl;
-		TreeModel->printTree();	
+		TreeUnderTest->printTree();			
 	}
 
-	cout << "Find Whether Any Nodes have objPos.number > 100" << endl;
-	expected = TreeModel->findGreater(100);
-	actual = TreeUnderTest->findGreater(100);
+	actual = TreeUnderTest->findGreater(THRESHOLD);
+	expected = true;
+
 	result = result & assert_equal(expected, actual);
-
-	for(int i = 0; i < COUNT / 2; i++)
-	{
-		itemArrayAdditional[i] = generateRandomPos();
-		TreeUnderTest->insert(itemArrayAdditional[i]);
-		TreeModel->insert(itemArrayAdditional[i]);
-	}
-
-	if(verboseMode)
-	{
-		cout << "After Inserting Large Numbers" << endl;
-		cout << "Tree Under Test:" << endl;
-		TreeUnderTest->printTree();
-		cout << "Tree Model:" << endl;
-		TreeModel->printTree();
-	}
-	
-	cout << "Find Whether Any Nodes have objPos.number > 100" << endl;
-	expected = TreeModel->findGreater(100);
-	actual = TreeUnderTest->findGreater(100);
-	result = result & assert_equal(expected, actual);
-			
+				
 	clearTrees();
 	if(result) passCount++;
 }
 
-// 2 assertion calls
-void testInsert50Insert20FindGreaterCheckPrintTree() {
+// 1 assertion call
+void testInsert20wo98FindGreaterCheckPrintTree() {
 
 	bool result = true;
 
-	cout << "TEST: testInsert50Insert20FindGreaterCheckPrintTree" << endl;
-	objPos itemArray[LARGE_COUNT];
-	objPos itemArrayAdditional[COUNT];
+	cout << "TEST: testInsert20wo98FindGreaterCheckPrintTree" << endl;
 	bool expected, actual;
 	createNewTrees();
+	createData20wo98();  // resetting remove modification
 
-	for(int i = 0; i < LARGE_COUNT; i++)
+	for(int i = 0; i < SIZE20; i++)
 	{
-		itemArray[i] = generateRandomPos();
-		TreeUnderTest->insert(itemArray[i]);
-		TreeModel->insert(itemArray[i]);
+		TreeUnderTest->insert(data20wo98[i]);
 	}
 
 	if(verboseMode)
 	{
-		cout << "Before Inserting Large Numbers" << endl;
 		cout << "Tree Under Test:" << endl;
-		TreeUnderTest->printTree();
-		cout << "Tree Model:" << endl;
-		TreeModel->printTree();
+		TreeUnderTest->printTree();			
 	}
 
-	cout << "Find Whether Any Nodes have objPos.number > 150" << endl;
-	expected = TreeModel->findGreater(150);
-	actual = TreeUnderTest->findGreater(150);
-	result = result & assert_equal(expected, actual);
+	actual = TreeUnderTest->findGreater(THRESHOLD);
+	expected = false;
 
-	for(int i = 0; i < COUNT; i++)
+	result = result & assert_equal(expected, actual);
+				
+	clearTrees();
+	if(result) passCount++;
+}
+
+// 1 assertion call
+void testInsert50w98FindGreaterCheckPrintTree() {
+
+	bool result = true;
+
+	cout << "TEST: testInsert50w98FindGreaterCheckPrintTree" << endl;
+	bool expected, actual;
+	createNewTrees();
+	createData50w98();  // resetting remove modification
+
+	for(int i = 0; i < SIZE50; i++)
 	{
-		itemArrayAdditional[i] = generateRandomPos();
-		TreeUnderTest->insert(itemArrayAdditional[i]);
-		TreeModel->insert(itemArrayAdditional[i]);
+		TreeUnderTest->insert(data50w98[i]);
 	}
 
 	if(verboseMode)
 	{
-		cout << "After Inserting Large Numbers" << endl;
 		cout << "Tree Under Test:" << endl;
-		TreeUnderTest->printTree();
-		cout << "Tree Model:" << endl;
-		TreeModel->printTree();
+		TreeUnderTest->printTree();			
 	}
-	
-	cout << "Find Whether Any Nodes have objPos.number > 150" << endl;
-	expected = TreeModel->findGreater(150);
-	actual = TreeUnderTest->findGreater(150);
+
+	actual = TreeUnderTest->findGreater(THRESHOLD);
+	expected = true;
+
 	result = result & assert_equal(expected, actual);
-			
+				
+	clearTrees();
+	if(result) passCount++;
+}
+
+
+// 1 assertion call
+void testInsert50wo98FindGreaterCheckPrintTree() {
+
+	bool result = true;
+
+	cout << "TEST: testInsert50wo98FindGreaterCheckPrintTree" << endl;
+	bool expected, actual;
+	createNewTrees();
+	createData50wo98();  // resetting remove modification
+
+	for(int i = 0; i < SIZE50; i++)
+	{
+		TreeUnderTest->insert(data50wo98[i]);
+	}
+
+	if(verboseMode)
+	{
+		cout << "Tree Under Test:" << endl;
+		TreeUnderTest->printTree();			
+	}
+
+	actual = TreeUnderTest->findGreater(THRESHOLD);
+	expected = false;
+
+	result = result & assert_equal(expected, actual);
+				
 	clearTrees();
 	if(result) passCount++;
 }
@@ -436,15 +580,31 @@ void testInsert50Insert20FindGreaterCheckPrintTree() {
 bool runAllTests(int argc, char const *argv[]) {
 	
 	// objPosBST Testers
+	cout << "[CREATE TEST DATA]" << endl;
+	createData20w98();
+	createData20wo98();
+	createData50w98();
+	createData50wo98();
+
 	cout << "[TREE TESTER STARTED]" << endl;
     testConstructorIsEmpty();  //1
 	testConstructorIsInTreeEmpty();  //1
-	testInsert20IsLeafCheckPrintTree();  //20
-	testInsert50IsLeafCheckPrintTree();  //50
-	testInsert20Remove10IsInTreeCheckPrintTree();  //20
-	testInsert50Remove20IsInTreeCheckPrintTree();  //50
-	testInsert20Insert10FindGreaterCheckPrintTree(); //2
-	testInsert50Insert20FindGreaterCheckPrintTree(); //2
+	
+	testInsert20IsLeafCheckPrintTreeCase1();  // 20 w 98	// 26
+	testInsert20IsLeafCheckPrintTreeCase2();  // 20 wo 98	// 26
+	testInsert50IsLeafCheckPrintTreeCase1();  // 50 w 98	// 26
+	testInsert50IsLeafCheckPrintTreeCase2();  // 50 wo 98	// 26
+
+	testInsert20Remove3IsInTreeCheckPrintTreeCase1();  // 20 w 98	// 26
+	testInsert20Remove5IsInTreeCheckPrintTreeCase2();  // 20 wo 98	// 26
+	testInsert50Remove8IsInTreeCheckPrintTreeCase1();  // 50 w 98	// 26
+	testInsert50Remove10IsInTreeCheckPrintTreeCase2(); // 50 wo 98	// 26
+	
+	testInsert20w98FindGreaterCheckPrintTree();   // 20 w 98	// 1
+	testInsert20wo98FindGreaterCheckPrintTree();  // 20 wo 98	// 1
+	testInsert50w98FindGreaterCheckPrintTree();   // 50 w 98	// 1
+	testInsert50wo98FindGreaterCheckPrintTree();  // 50 wo 98	// 1
+
 	cout << "[TREE TESTER ENDED]" << endl << endl;
 
 	if(successCount != TOTAL_ASSERT_COUNT) 
@@ -470,44 +630,15 @@ int main(int argc, char const *argv[]) {
 void clearTrees()
 {
 	delete TreeUnderTest;
-	delete TreeModel;
 	TreeUnderTest = NULL;	
-	TreeModel = NULL;	
 }
 
 void createNewTrees()
 {
-	if(TreeUnderTest != NULL || TreeModel != NULL) clearTrees();
+	if(TreeUnderTest != NULL) clearTrees();
 	TreeUnderTest = new objPosBST();
-	TreeModel = new objPosBSTModel();
 }
 
-
-objPos generateRandomPos()
-{
-	objPos temp;
-
-	temp.setX(rand() % 100);
-	temp.setY(rand() % 100);
-	temp.setNum(rand() % 500);
-	temp.setPF(rand() % 26 + 'a');
-	temp.setSym(rand() % 26 + 'A');
-
-	return temp;
-}
-
-objPos generateRandomPosNumAbove100()
-{
-	objPos temp;
-
-	temp.setX(rand() % 100 + 100);
-	temp.setY(rand() % 100 + 100);
-	temp.setNum(rand() % 500);
-	temp.setPF(rand() % 26 + 'a');
-	temp.setSym(rand() % 26 + 'A');
-
-	return temp;
-}
 
 
 bool assert_equal(int a, int b)
