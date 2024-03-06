@@ -50,11 +50,11 @@ void objPosStack::generateObjects(int count)
     {
         // Generate Prefix
         randCandidate = rand() % 26 + 'A';  // generaate 26 upper case alphabets
-        if(rand() % 2) randCandidate += 32;  // randomly lowercase the candidate
+        //if(rand() % 2) randCandidate += 32;  // randomly lowercase the candidate
         temp.setPF((char)randCandidate);
 
-        // Generate Number [0, 99]
-        temp.setNum(rand() % 100);
+        // Generate Number [0, 79]
+        temp.setNum(rand() % 80);
 
         // Symbol should be fixed to *
         temp.setSym('*');

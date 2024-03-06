@@ -14,6 +14,27 @@ objPosBST::~objPosBST()
     // Invoke delete tree, then set root to NULL
 }
 
+
+
+
+void objPosBST::deleteTree(const TNode* thisNode)
+{
+	// Delete all nodes in the tree
+
+    // Question from Class - Which Traversal Order should you use for this method?
+    //   WARNING - using the wrong one will result in potential heap error.
+}
+
+// Public Interface, Implemented
+void objPosBST::deleteTree()
+{
+    deleteTree(root); // recursive call on the private helper function
+    root = nullptr;
+}
+
+
+
+
 bool objPosBST::isEmptyTree() const
 {
     // Check if tree is empty
@@ -68,13 +89,13 @@ bool objPosBST::isInTree(const objPos& thisPos, const TNode* thisNode) const
 
 
 // Public Interface, Implemented
-void objPosBST::insert(const objPos &thisPos, TNode* &thisNode)
+void objPosBST::insert(const objPos &thisPos)
 {
     insert(thisPos, root); // recursive call on the private helper function
 }
 
 // insert OR update!!
-void objPosBST::insert(const objPos &thisPos)
+void objPosBST::insert(const objPos &thisPos, TNode* &thisNode)
 {
     // Insert objPos as a Node into the BST
 
@@ -140,24 +161,6 @@ bool objPosBST::isLeaf(const objPos &thisPos, const TNode* thisNode) const
 bool objPosBST::isLeaf(const objPos &thisPos) const
 {
     return isLeaf(thisPos, root); // recursive call on the private helper function
-}
-
-
-
-
-void objPosBST::deleteTree(const TNode* thisNode)
-{
-	// Delete all nodes in the tree
-
-    // Question from Class - Which Traversal Order should you use for this method?
-    //   WARNING - using the wrong one will result in potential heap error.
-}
-
-// Public Interface, Implemented
-void objPosBST::deleteTree()
-{
-    deleteTree(root); // recursive call on the private helper function
-    root = nullptr;
 }
 
 
