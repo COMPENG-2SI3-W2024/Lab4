@@ -445,7 +445,7 @@ void testInsert50Remove10IsInTreeCheckPrintTreeCase2() {
 // Required Methods:
 // findGreater()
 
-#define THRESHOLD 98
+#define THRESHOLD 98  // DO NOT CHANGE!!
 
 // 1 assertion call
 void testInsert20w98FindGreaterCheckPrintTree() {

@@ -105,7 +105,7 @@ bool objPos::isOverlap(const objPos* thisPos)
     return (x == thisPos->getX() && y == thisPos->getY());
 }
 
-void objPos::printObjPos()
+void objPos::printObjPos() const
 {
     cout << "(" << x << "," << y << "), " 
          << prefix << " " << number << " " << symbol << endl;
