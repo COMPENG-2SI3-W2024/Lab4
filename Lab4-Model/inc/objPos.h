@@ -37,7 +37,7 @@ class objPos
 
         bool isOverlap(const objPos* thisPos);
 
-        void printObjPos();
+        void printObjPos() const;
 };
 
 #endif

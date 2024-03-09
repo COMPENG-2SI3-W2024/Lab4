@@ -31,11 +31,16 @@ objPos::objPos(const objPos& thisPos) // copy constructor
 
 objPos& objPos::operator= (const objPos& thisPos)
 {
-    x = thisPos.x;
-    y = thisPos.y;
-    number = thisPos.number;
-    prefix = thisPos.prefix;
-    symbol = thisPos.symbol;
+    if(this != &thisPos)
+    {
+        x = thisPos.x;
+        y = thisPos.y;
+        number = thisPos.number;
+        prefix = thisPos.prefix;
+        symbol = thisPos.symbol;
+    }
+
+    return *this;
 }
 
 
@@ -105,7 +110,7 @@ bool objPos::isOverlap(const objPos* thisPos)
     return (x == thisPos->getX() && y == thisPos->getY());
 }
 
-void objPos::printObjPos()
+void objPos::printObjPos() const
 {
     // Modified for Display Purpose
     
