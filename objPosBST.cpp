@@ -67,7 +67,7 @@ void objPosBST::printTree(const TNode* thisNode) const  // private recursive
 // Public Interface, Implemented
 bool objPosBST::isInTree(const objPos &thisPos) const
 {
-    isInTree(thisPos, root); // recursive call on the private helper function
+    return isInTree(thisPos, root); // recursive call on the private helper function
 }
 
 bool objPosBST::isInTree(const objPos& thisPos, const TNode* thisNode) const
